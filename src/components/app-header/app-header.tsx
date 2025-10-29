@@ -1,18 +1,4 @@
-<<<<<<< HEAD
-// app-header.tsx
-
-import { FC } from 'react';
-import { AppHeaderUI } from '@ui';
-import { useSelector } from '../../services/store';
-
-export const AppHeader: FC = () => {
-  const { data } = useSelector((state) => state.user);
-
-  return <AppHeaderUI userName={data.name} />;
-};
-=======
 import { FC } from 'react';
 import { AppHeaderUI } from '@ui';
 
 export const AppHeader: FC = () => <AppHeaderUI userName='' />;
->>>>>>> feature-new

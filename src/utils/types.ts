@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-// types.ts
-
-=======
->>>>>>> feature-new
 export type TIngredient = {
   _id: string;
   name: string;

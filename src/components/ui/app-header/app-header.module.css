@@ -1,10 +1,6 @@
 .header {
   background-color: var(--background);
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> feature-new
 .menu {
   display: flex;
   align-items: center;
@@ -18,13 +14,6 @@
   flex-basis: 35%;
 }
 
-<<<<<<< HEAD
-.navlink {
-  text-decoration: none;
-}
-
-=======
->>>>>>> feature-new
 .link {
   display: flex;
   text-decoration: none;

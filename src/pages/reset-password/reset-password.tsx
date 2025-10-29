@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-// reset-password.tsx
-
-=======
->>>>>>> feature-new
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-// burger-constructor-element.tsx
-
-import { FC, memo } from 'react';
-import { BurgerConstructorElementUI } from '@ui';
-import { BurgerConstructorElementProps } from './type';
-import { useDispatch } from '../../services/store';
-import {
-  moveIngredient,
-  removeIngredient
-} from '../../services/slices/builderSlice';
-
-export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
-  ({ ingredient, index, totalItems }) => {
-    const dispatch = useDispatch();
-
-    const handleMoveDown = () => {
-      dispatch(moveIngredient({ index, upwards: false }));
-    };
-
-    const handleMoveUp = () => {
-      dispatch(moveIngredient({ index, upwards: true }));
-    };
-
-    const handleClose = () => {
-      dispatch(removeIngredient(ingredient.id));
-    };
-=======
 import { FC, memo } from 'react';
 import { BurgerConstructorElementUI } from '@ui';
 import { BurgerConstructorElementProps } from './type';
@@ -37,7 +9,6 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
     const handleMoveUp = () => {};
 
     const handleClose = () => {};
->>>>>>> feature-new
 
     return (
       <BurgerConstructorElementUI
