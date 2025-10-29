@@ -1,3 +1,5 @@
+// type.ts
+
 export type FeedInfoUIProps = {
   feed: any;
   readyOrders: number[];

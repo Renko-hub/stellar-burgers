@@ -1,3 +1,5 @@
+// type.ts
+
 import { TOrder } from '@utils-types';
 
 export type BurgerConstructorUIProps = {

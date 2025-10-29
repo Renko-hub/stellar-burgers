@@ -10,37 +10,54 @@ import {
   createOrder,
   resetOrderModalData
 } from '../../services/slices/ordersSlice';
+import { resetConstructor } from '../../services/slices/builderSlice';
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const constructorItems = useSelector((state) => state.builder); // Доступ к конструктору
+  const constructorItems = useSelector((state) => state.builder); // получаем конструктор
+  const { isAuthenticated } = useSelector((state) => state.user); // проверяем аутентификацию
+  const { orderRequest, orderModalData } = useSelector((state) => state.orders); // получаем статус заказа
 
-  const { isAuthenticated } = useSelector((state) => state.user); // Проверяем аутентификацию
-
-  const { orderRequest, orderModalData } = useSelector((state) => state.orders); // Данные о заказе
-
+  /**
+   * Функция для клика на кнопке "Отправить заказ":
+   */
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return; // Если булочка отсутствует или заказ уже отправлен
+    if (!constructorItems.bun || orderRequest) return; // проверка наличия булочки и отсутствия дублирования запросов
 
     if (!isAuthenticated) {
-      return navigate('/login'); // Перенаправляем на страницу входа
+      return navigate('/login'); // перенаправляем на форму входа
     }
 
+    // формируем массив с ID ингредиентов
     const data = [
       constructorItems.bun._id,
-      ...constructorItems.ingredients.map((ingredient) => ingredient._id),
+      ...constructorItems.ingredients.map((item) => item._id),
       constructorItems.bun._id
-    ]; // Формируем список ID ингредиентов
+    ];
 
-    dispatch(createOrder(data)); // Отправляем заказ
+    // отправляем заказ
+    dispatch(createOrder(data))
+      .then(() => {
+        // успешная отправка заказа, очищаем конструктор
+        dispatch(resetConstructor());
+      })
+      .catch((err) => {
+        console.error('Ошибка при оформлении заказа:', err);
+      });
   };
 
+  /**
+   * Функция для закрытия модального окна заказа:
+   */
   const closeOrderModal = () => {
-    dispatch(resetOrderModalData()); // Закрываем окно заказа
+    dispatch(resetOrderModalData()); // закрываем модальное окно
   };
 
+  /**
+   * Расчёт стоимости заказа (не трогаем!):
+   */
   const price = useMemo(
     () =>
       (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +

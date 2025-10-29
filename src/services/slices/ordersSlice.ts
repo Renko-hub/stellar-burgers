@@ -10,17 +10,11 @@ import { TOrder } from '@utils-types';
 
 // Интерфейс состояния Orders Slice
 interface TOrdersState {
-  // Показатель загрузки заказа
   isOrderLoading: boolean;
-  // Показатель загрузки списка заказов
   isOrdersLoading: boolean;
-  // Признак отправки заказа
   orderRequest: boolean;
-  // Данные отображаемого заказа в модальном окне
   orderModalData: TOrder | null;
-  // Информация об ошибке
   error: null | SerializedError;
-  // Массив текущих заказов
   data: TOrder[];
 }
 
@@ -57,7 +51,6 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    // Очистка данных о заказе в модальном окне
     resetOrderModalData(state) {
       state.orderModalData = null;
     }

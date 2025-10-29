@@ -1,3 +1,5 @@
+// order-status.tsx
+
 import React, { FC } from 'react';
 import { OrderStatusProps } from './type';
 import { OrderStatusUI } from '@ui';
@@ -12,14 +14,14 @@ export const OrderStatus: FC<OrderStatusProps> = ({ status }) => {
   let textStyle = '';
   switch (status) {
     case 'pending':
-      textStyle = '#E52B1A';
+      textStyle = '#E52B1A'; // Красный оттенок для ожидающего заказа
       break;
     case 'done':
-      textStyle = '#00CCCC';
+      textStyle = '#00CCCC'; // Голубой оттенок для выполненного заказа
       break;
     default:
-      textStyle = '#F2F2F3';
+      textStyle = '#F2F2F3'; // Серый оттенок для нового заказа
   }
 
-  return <OrderStatusUI textStyle={textStyle} text={statusText[textStyle]} />;
+  return <OrderStatusUI textStyle={textStyle} text={statusText[status]} />;
 };

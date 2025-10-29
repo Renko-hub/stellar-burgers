@@ -1,3 +1,5 @@
+// order-infoUI.tsx
+
 import React, { FC, memo } from 'react';
 import {
   CurrencyIcon,
@@ -11,11 +13,21 @@ import { OrderStatus } from '@components';
 
 export const OrderInfoUI: FC<OrderInfoUIProps> = memo(({ orderInfo }) => (
   <div className={styles.wrap}>
-    <h3 className={`text text_type_main-medium  pb-3 pt-10 ${styles.header}`}>
+    {/* Блок с номером заказа */}
+    <div className={`text text_type_digits-default pb-6`}>
+      № {orderInfo.number}
+    </div>
+
+    {/* Заголовок заказа */}
+    <h3 className={`text text_type_main-medium pb-3 pt-10 ${styles.header}`}>
       {orderInfo.name}
     </h3>
+
+    {/* Отображение статуса заказа */}
     <OrderStatus status={orderInfo.status} />
-    <p className={`text text_type_main-medium pt-15 pb=6`}>Состав:</p>
+
+    {/* Состав заказа */}
+    <p className={`text text_type_main-medium pt-15 pb-6`}>Состав:</p>
     <ul className={`${styles.list} mb-8`}>
       {Object.values(orderInfo.ingredientsInfo).map((item, index) => (
         <li className={`pb-4 pr-6 ${styles.item}`} key={index}>
@@ -38,6 +50,8 @@ export const OrderInfoUI: FC<OrderInfoUIProps> = memo(({ orderInfo }) => (
         </li>
       ))}
     </ul>
+
+    {/* Информация внизу: дата и итоговая сумма */}
     <div className={styles.bottom}>
       <p className='text text_type_main-default text_color_inactive'>
         <FormattedDate date={orderInfo.date} />

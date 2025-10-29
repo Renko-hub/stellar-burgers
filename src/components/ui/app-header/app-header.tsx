@@ -1,3 +1,5 @@
+// app-headerUI.tsx
+
 import { FC } from 'react';
 import styles from './app-header.module.css';
 import { TAppHeaderUIProps } from './type';
@@ -16,6 +18,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={`${styles.menu} p-4`}>
       <div className={styles.menu_part_left}>
+        {/* Навигационные ссылки */}
         <NavLink to='/' className={clsx(styles.navlink, 'mr-4', 'p-4')}>
           {({ isActive }) => (
             <div className={clsx(styles.link, isActive && styles.link_active)}>
@@ -37,10 +40,16 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           )}
         </NavLink>
       </div>
+
+      {/* Логотип теперь тоже ведет на главную страницу */}
       <div className={styles.logo}>
-        <Logo className='' />
+        <NavLink to='/'>
+          <Logo className='' />
+        </NavLink>
       </div>
+
       <div className={styles.link_position_last}>
+        {/* Профильная ссылка */}
         <NavLink to='/profile' className={clsx(styles.navlink, 'p-4')}>
           {({ isActive }) => (
             <div className={clsx(styles.link, isActive && styles.link_active)}>

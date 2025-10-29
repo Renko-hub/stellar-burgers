@@ -1,6 +1,7 @@
 // builderSlice.ts
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 import {
   TConstructorIngredient,
   TIngredient,
@@ -10,19 +11,12 @@ import {
 
 // Интерфейс состояния Burger Builder Slice
 interface TBurgerBuilderState {
-  // Булочка для бургера
   bun?: TIngredient | null;
-  // Ингредиенты, выбранные пользователем
   ingredients: TConstructorIngredient[];
-  // История предыдущих заказов
   history: TOrder[];
-  // Общая калорийность выбранного набора ингредиентов
   totalCalories: number;
-  // Статус текущего заказа
   orderStatus: 'pending' | 'processing' | 'completed' | '';
-  // Признак аутентифицированности пользователя
   isAuthenticated: boolean;
-  // Текущие данные пользователя
   currentUser: TUser | null;
 }
 
@@ -42,23 +36,20 @@ const burgerBuilderSlice = createSlice({
   name: 'burgerBuilder',
   initialState,
   reducers: {
-    // Устанавливаем булочку в конструктор
     setBun(state, action: PayloadAction<TIngredient | null>) {
       state.bun = action.payload;
     },
-    // Добавляем новый ингредиент в конструктор
     addIngredient(state, action: PayloadAction<TIngredient>) {
       if (action.payload.type === 'bun') {
         state.bun = action.payload;
       } else {
         state.ingredients.push({
           ...action.payload,
-          id: Math.random().toString(36).substr(2, 9)
+          id: uuidv4() // Уникальный идентификатор
         });
         state.totalCalories += action.payload.calories || 0;
       }
     },
-    // Удаляем указанный ингредиент из конструктора
     removeIngredient(state, action: PayloadAction<string>) {
       const removedIngredient = state.ingredients.find(
         (i) => i.id === action.payload
@@ -70,7 +61,6 @@ const burgerBuilderSlice = createSlice({
         (i) => i.id !== action.payload
       );
     },
-    // Меняем позицию ингредиента в списке
     moveIngredient(
       state,
       action: PayloadAction<{ index: number; upwards: boolean }>
@@ -84,7 +74,6 @@ const burgerBuilderSlice = createSlice({
         state.ingredients.splice(action.payload.index + 1, 0, ingredientLink);
       }
     },
-    // Очищаем весь конструктор и сбрасываем состояние
     resetConstructor(state) {
       state.bun = null;
       state.ingredients = [];
@@ -92,19 +81,15 @@ const burgerBuilderSlice = createSlice({
       state.totalCalories = 0;
       state.orderStatus = '';
     },
-    // Установить статус аутентификации пользователя
     setAuthentication(state, action: PayloadAction<boolean>) {
       state.isAuthenticated = action.payload;
     },
-    // Установить текущие данные пользователя
     setCurrentUser(state, action: PayloadAction<TUser | null>) {
       state.currentUser = action.payload;
     },
-    // Добавить заказ в историю заказов
     addToHistory(state, action: PayloadAction<TOrder>) {
       state.history.push(action.payload);
     },
-    // Установить статус текущего заказа
     setOrderStatus(
       state,
       action: PayloadAction<'pending' | 'processing' | 'completed'>
@@ -114,7 +99,7 @@ const burgerBuilderSlice = createSlice({
   }
 });
 
-// Экспортирование всех actions и reducer для дальнейшего использования
+// Экспорт всех actions и reducer для дальнейшего использования
 export const {
   setBun,
   addIngredient,
