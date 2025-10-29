@@ -79,18 +79,27 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <CurrencyIcon type='primary' />
       </div>
       <Button
+<<<<<<< HEAD
         data-order-button
+=======
+>>>>>>> feature-new
         htmlType='button'
         type='primary'
         size='large'
         children='Оформить заказ'
         onClick={onOrderClick}
+<<<<<<< HEAD
         disabled={
           !constructorItems.bun || constructorItems.ingredients.length === 0
         }
       />
     </div>
     {/* Прелоадер в данном месте в "Можно лучше" */}
+=======
+      />
+    </div>
+
+>>>>>>> feature-new
     {orderRequest && (
       <Modal onClose={closeOrderModal} title={'Оформляем заказ...'}>
         <Preloader />

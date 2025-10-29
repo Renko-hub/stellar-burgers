@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // profile-orders.tsx
 
 import { fetchOrders } from '../../services/slices/ordersSlice';
@@ -12,6 +13,15 @@ export const ProfileOrders: FC = () => {
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
+=======
+import { ProfileOrdersUI } from '@ui-pages';
+import { TOrder } from '@utils-types';
+import { FC } from 'react';
+
+export const ProfileOrders: FC = () => {
+  /** TODO: взять переменную из стора */
+  const orders: TOrder[] = [];
+>>>>>>> feature-new
 
   return <ProfileOrdersUI orders={orders} />;
 };

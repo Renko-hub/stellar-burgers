@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // order-info.tsx
 
 import { FC, useEffect, useMemo } from 'react';
@@ -22,6 +23,26 @@ export const OrderInfo: FC = () => {
   useEffect(() => {
     dispatch(fetchOrder(Number(number))); // Запрашиваем заказ при загрузке компонента
   }, [dispatch, number]); // Добавили номер заказа в зависимости эффекта
+=======
+import { FC, useMemo } from 'react';
+import { Preloader } from '../ui/preloader';
+import { OrderInfoUI } from '../ui/order-info';
+import { TIngredient } from '@utils-types';
+
+export const OrderInfo: FC = () => {
+  /** TODO: взять переменные orderData и ingredients из стора */
+  const orderData = {
+    createdAt: '',
+    ingredients: [],
+    _id: '',
+    status: '',
+    name: '',
+    updatedAt: 'string',
+    number: 0
+  };
+
+  const ingredients: TIngredient[] = [];
+>>>>>>> feature-new
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -34,6 +55,7 @@ export const OrderInfo: FC = () => {
     };
 
     const ingredientsInfo = orderData.ingredients.reduce(
+<<<<<<< HEAD
       (acc: TIngredientsWithCount, itemId) => {
         const ingredient = ingredients.find(
           (ing: TIngredient) => ing._id === itemId
@@ -48,6 +70,24 @@ export const OrderInfo: FC = () => {
         return acc;
       },
       {} as TIngredientsWithCount
+=======
+      (acc: TIngredientsWithCount, item) => {
+        if (!acc[item]) {
+          const ingredient = ingredients.find((ing) => ing._id === item);
+          if (ingredient) {
+            acc[item] = {
+              ...ingredient,
+              count: 1
+            };
+          }
+        } else {
+          acc[item].count++;
+        }
+
+        return acc;
+      },
+      {}
+>>>>>>> feature-new
     );
 
     const total = Object.values(ingredientsInfo).reduce(
@@ -63,12 +103,17 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
+<<<<<<< HEAD
   if (isOrderLoading || !ingredients.length) {
     return <Preloader />;
   }
 
   if (!orderInfo) {
     return null;
+=======
+  if (!orderInfo) {
+    return <Preloader />;
+>>>>>>> feature-new
   }
 
   return <OrderInfoUI orderInfo={orderInfo} />;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // app-header.tsx
 
 import { FC } from 'react';
@@ -9,3 +10,9 @@ export const AppHeader: FC = () => {
 
   return <AppHeaderUI userName={data.name} />;
 };
+=======
+import { FC } from 'react';
+import { AppHeaderUI } from '@ui';
+
+export const AppHeader: FC = () => <AppHeaderUI userName='' />;
+>>>>>>> feature-new

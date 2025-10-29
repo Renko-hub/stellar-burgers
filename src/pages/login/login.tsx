@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // login.tsx
 
 import { FC, SyntheticEvent, useState } from 'react';
@@ -26,11 +27,26 @@ export const Login: FC = () => {
 
       navigate(from.pathname, { replace: true });
     } catch (_) {}
+=======
+import { FC, SyntheticEvent, useState } from 'react';
+import { LoginUI } from '@ui-pages';
+
+export const Login: FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+>>>>>>> feature-new
   };
 
   return (
     <LoginUI
+<<<<<<< HEAD
       errorText={loginError?.message}
+=======
+      errorText=''
+>>>>>>> feature-new
       email={email}
       setEmail={setEmail}
       password={password}

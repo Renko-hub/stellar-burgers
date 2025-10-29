@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // burger-api.ts
 
+=======
+>>>>>>> feature-new
 import { setCookie, getCookie } from './cookie';
 import { TIngredient, TOrder, TOrdersData, TUser } from './types';
 

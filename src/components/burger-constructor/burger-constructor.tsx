@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 // BurgerConstructor.tsx
 
+=======
+>>>>>>> feature-new
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 
+<<<<<<< HEAD
 import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -40,6 +44,25 @@ export const BurgerConstructor: FC = () => {
   const closeOrderModal = () => {
     dispatch(resetOrderModalData()); // Закрываем окно заказа
   };
+=======
+export const BurgerConstructor: FC = () => {
+  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
+  const constructorItems = {
+    bun: {
+      price: 0
+    },
+    ingredients: []
+  };
+
+  const orderRequest = false;
+
+  const orderModalData = null;
+
+  const onOrderClick = () => {
+    if (!constructorItems.bun || orderRequest) return;
+  };
+  const closeOrderModal = () => {};
+>>>>>>> feature-new
 
   const price = useMemo(
     () =>
@@ -51,6 +74,11 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
+<<<<<<< HEAD
+=======
+  return null;
+
+>>>>>>> feature-new
   return (
     <BurgerConstructorUI
       price={price}

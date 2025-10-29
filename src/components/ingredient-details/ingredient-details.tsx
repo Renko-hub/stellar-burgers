@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // ingredient-details.tsx
 
 import { useSelector } from '../../services/store';
@@ -22,6 +23,17 @@ export const IngredientDetails: FC = () => {
 
   if (!ingredientData) {
     console.warn(`Ingredient with ID ${id} not found.`);
+=======
+import { FC } from 'react';
+import { Preloader } from '../ui/preloader';
+import { IngredientDetailsUI } from '../ui/ingredient-details';
+
+export const IngredientDetails: FC = () => {
+  /** TODO: взять переменную из стора */
+  const ingredientData = null;
+
+  if (!ingredientData) {
+>>>>>>> feature-new
     return <Preloader />;
   }
 
