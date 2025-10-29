@@ -1,3 +1,5 @@
+// reset-password.tsx
+
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
