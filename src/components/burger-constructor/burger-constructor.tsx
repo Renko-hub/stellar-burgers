@@ -1,24 +1,45 @@
+// BurgerConstructor.tsx
+
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 
+import { useDispatch, useSelector } from '../../services/store';
+import { useNavigate } from 'react-router-dom';
+import {
+  createOrder,
+  resetOrderModalData
+} from '../../services/slices/ordersSlice';
+
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const constructorItems = {
-    bun: {
-      price: 0
-    },
-    ingredients: []
-  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const orderRequest = false;
+  const constructorItems = useSelector((state) => state.builder); // Доступ к конструктору
 
-  const orderModalData = null;
+  const { isAuthenticated } = useSelector((state) => state.user); // Проверяем аутентификацию
+
+  const { orderRequest, orderModalData } = useSelector((state) => state.orders); // Данные о заказе
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (!constructorItems.bun || orderRequest) return; // Если булочка отсутствует или заказ уже отправлен
+
+    if (!isAuthenticated) {
+      return navigate('/login'); // Перенаправляем на страницу входа
+    }
+
+    const data = [
+      constructorItems.bun._id,
+      ...constructorItems.ingredients.map((ingredient) => ingredient._id),
+      constructorItems.bun._id
+    ]; // Формируем список ID ингредиентов
+
+    dispatch(createOrder(data)); // Отправляем заказ
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    dispatch(resetOrderModalData()); // Закрываем окно заказа
+  };
 
   const price = useMemo(
     () =>
@@ -29,8 +50,6 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
-
-  return null;
 
   return (
     <BurgerConstructorUI
